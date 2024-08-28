@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LinkedIn Automation</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>LinkedIn Automation</h1>
-    <button id="acceptConnections">Bulk Accept Connections</button>
-    <button id="moveMessages">Move Messages to Others</button>
+    <div class="popup-container">
+        <header class="popup-header">
+            <div class="header-title">LinkedIn Automation</div>
+            <div class="header-icon"><img src="icon.png" alt="Icon" /></div>
+        </header>
+        <div class="popup-section">
+            <button id="acceptConnections" class="popup-button">Accept Requests</button>
+            <p class="description">This will bulk accept the first 10 requests.</p>
+        </div>
+        <div class="popup-section">
+            <button id="moveMessages" class="popup-button">Archive Messages</button>
+            <p class="description">This will mark the open messages as "Read" and move them to the "Other" folder.</p>
+        </div>
+        <footer class="popup-footer">
+            <p class="source-code">[Made with 💖 by <a href="https://www.linkedin.com/in/francisbrero/">Francis Brero</a>]</p>
+        </footer>
+    </div>
     <script src="popup.js"></script>
 </body>
 </html>
