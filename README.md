@@ -37,7 +37,7 @@ Click the icon to open the popup and access the automation features.
 
 ### Accepting Connection Requests
 
-1. Click on the extension icon in the Chrome toolbar.
+1. Click on the extension icon in the Chrome toolbar when you're on the [invitation manager](https://www.linkedin.com/mynetwork/invitation-manager/) page.
 2. In the popup, click the Accept Connections button.
 3. The extension will automatically accept up to 10 connection requests.
 
