@@ -70,3 +70,12 @@ body {
     border: none;
     cursor: pointer;
 }
+
+.popup-button.disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.popup-button.disabled:hover {
+    background-color: #cccccc;
+}

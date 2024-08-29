@@ -122,10 +122,57 @@ function moveOpenMessagesToOthers() {
 }
 
 // Event listeners for the buttons in the popup
-document.getElementById('acceptConnections').addEventListener('click', () => {
-    acceptLimitedConnections();
-});
+document.addEventListener('DOMContentLoaded', function () {
+    // Get the current active tab
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        const tab = tabs[0];
+        const url = tab.url;
 
-document.getElementById('moveMessages').addEventListener('click', () => {
-    moveOpenMessagesToOthers();
+        // Define the URLs where the "Accept Requests" button should be active
+        const validUrls = [
+            "https://www.linkedin.com/mynetwork/invitation-manager/",
+            "https://www.linkedin.com/mynetwork/grow/"
+        ];
+
+        // Check if the current URL is one of the valid URLs
+        const isValidUrl = validUrls.some(validUrl => url.startsWith(validUrl));
+
+        // Get button and description elements
+        const acceptButton = document.getElementById('acceptConnections');
+        const moveMessagesButton = document.getElementById('moveMessages');
+        const acceptDescription = document.querySelector('#acceptDescription');
+
+        if (isValidUrl) {
+            // If on a valid LinkedIn page, enable the button
+            acceptButton.disabled = false;
+            acceptButton.classList.remove('disabled');
+        } else {
+            // If not on a valid LinkedIn page, disable the button and update description
+            acceptButton.disabled = true;
+            acceptButton.classList.add('disabled');
+            acceptDescription.innerText = "Please navigate to LinkedIn and specifically to one of the pages above to use 'Accept Requests'.";
+        }
+
+        // If not on LinkedIn at all, disable both buttons
+        if (!url.includes("linkedin.com")) {
+            acceptButton.disabled = true;
+            moveMessagesButton.disabled = true;
+            acceptButton.classList.add('disabled');
+            moveMessagesButton.classList.add('disabled');
+            acceptDescription.innerText = "This extension only works on LinkedIn.";
+        }
+    });
+
+    // Add event listeners for buttons (only works if buttons are not disabled)
+    document.getElementById('acceptConnections').addEventListener('click', () => {
+        if (!document.getElementById('acceptConnections').disabled) {
+            acceptLimitedConnections();
+        }
+    });
+
+    document.getElementById('moveMessages').addEventListener('click', () => {
+        if (!document.getElementById('moveMessages').disabled) {
+            moveOpenMessagesToOthers();
+        }
+    });
 });
